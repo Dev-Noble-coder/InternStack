@@ -51,7 +51,7 @@ const Footer: React.FC = () => {
 
                 {/* Bottom Bar */}
                 <div className="pt-8 border-t-2 border-[#F1F5F9] text-center text-[#94A3B8] text-xs">
-                    <p>© {currentYear} InternStack | ALL_RIGHTS_RESERVED</p>
+                    <p>© {currentYear} InternStack | ALL RIGHTS RESERVED</p>
                 </div>
             </div>
         </footer>

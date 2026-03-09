@@ -66,16 +66,16 @@ const HeroSection: React.FC = () => {
           className="flex flex-col sm:flex-row-reverse gap-4 w-full sm:w-auto text-sm"
         >
           <Link 
-            href="/auth" 
+            href="/" 
             className="bg-[#F3A712] text-[#29335C] px-10 py-2.5  font-medium flex items-center justify-center gap-2 shadow-[4px_4px_0px_0px_#FFF]"
           >
-            Get Started for Free <ArrowRight size={18} />
+            Join the Waitlist <ArrowRight size={18} />
           </Link>
           <Link 
-            href="/how-it-works" 
+            href="#" 
             className="border border-[#F3A712] text-[#F3A712] px-10 py-2.5  font-medium flex items-center justify-center gap-2"
           >
-            See How It Works
+            Get Started Now
           </Link>
         </motion.div>
 

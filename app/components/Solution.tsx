@@ -177,13 +177,13 @@ const Solution: React.FC = () => {
         Ready to <span className="text-[#F3A712]">Deploy</span> your career?
       </h2>
       <p className="text-[#94A3B8] font-medium max-w-xl mx-auto text-sm ">
-        Join 1,000+ students already making their SIWES journey easier.
+        Join students already making their SIWES journey easier.
       </p>
     </div>
 
     <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto text-sm">
       <Link 
-        href="/auth" 
+        href="/" 
         className="bg-[#F3A712] text-[#29335C] px-10 py-2.5  uppercase tracking-widest flex items-center justify-center gap-2 
                    border-2 border-white
                    shadow-[4px_4px_0px_0px_#FFF] 
@@ -191,7 +191,7 @@ const Solution: React.FC = () => {
                    active:translate-y-0.5 active:shadow-[2px_2px_0px_0px_#FFF] 
                    transition-all duration-200"
       >
-        Initialize Access <ArrowRight size={20} strokeWidth={3} />
+        JOIN THE WAITLIST <ArrowRight size={20} strokeWidth={3} />
       </Link>
     
     </div>
