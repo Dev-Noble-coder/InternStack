@@ -166,7 +166,7 @@ const NavBar = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-center w-full bg-[#F3A712] text-[#29335C] px-6 py-4 shadow-[4px_4px_0px_0px_#FFF] text-sm font-black hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_#FFF] active:translate-y-0 active:shadow-none transition-all duration-200"
+                  className="flex items-center justify-center w-full bg-[#F3A712] text-[#29335C] px-6 py-4 shadow-[4px_4px_0px_0px_#FFF] text-sm font-semibold hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_#FFF] active:translate-y-0 active:shadow-none transition-all duration-200"
                 >
                   JOIN THE WAITLIST
                 </Link>
