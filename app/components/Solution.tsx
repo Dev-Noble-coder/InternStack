@@ -183,7 +183,9 @@ const Solution: React.FC = () => {
 
                     <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto text-sm">
                         <Link
-                            href="/"
+                            href="https://forms.gle/PzStD7NhaBzTJwgv5"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="bg-[#F3A712] text-[#29335C] px-10 py-2.5  uppercase tracking-widest flex items-center justify-center gap-2 
                    border-2 border-white
                    shadow-[4px_4px_0px_0px_#FFF] 
