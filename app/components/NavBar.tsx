@@ -12,7 +12,6 @@ const NavBar = () => {
 
   const isActive = (path: string) => pathname === path;
 
-  // Scroll locking logic
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
