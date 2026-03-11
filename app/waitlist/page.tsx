@@ -19,6 +19,7 @@ const UNIVERSITIES = [
 ];
 
 const LEVELS = ["100 lvl", "200 lvl", "300 lvl", "400 lvl"];
+const DEPARTMENTS = ["Computer Science", "Computer Engineering", "Other"];
 const DURATIONS = ["3 months", "6 months"];
 const CHALLENGES = [
   "Finding a company that accepts SIWES students",
@@ -34,6 +35,8 @@ interface FormData {
   whatsappNumber: string;
   university: string;
   level: string;
+  department: string;
+  otherDepartment?: string;
   duration: string;
   challenges: string[];
   source: string;
@@ -47,6 +50,8 @@ export default function WaitlistPage() {
     whatsappNumber: '',
     university: '',
     level: '',
+    department: '',
+    otherDepartment: '',
     duration: '',
     challenges: [],
     source: '',
@@ -79,6 +84,7 @@ export default function WaitlistPage() {
           full_name: formData.fullName,
           whatsapp_number: formData.whatsappNumber,
           university: formData.university,
+          department: formData.department === 'Other' ? formData.otherDepartment : formData.department,
           current_level: formData.level,
           siwes_duration: formData.duration,
           challenges: formData.challenges,
@@ -263,6 +269,43 @@ export default function WaitlistPage() {
                 </label>
               ))}
             </div>
+          </div>
+
+          {/* Department */}
+          <div className="space-y-4">
+            <label className="block text-sm font-bold uppercase tracking-wider text-[#F0CEA0]">Department *</label>
+            <div className="flex flex-wrap gap-6">
+              {DEPARTMENTS.map((dept) => (
+                <label key={dept} className="flex items-center gap-3 cursor-pointer group">
+                  <div className="relative flex items-center justify-center">
+                    <input
+                      required
+                      type="radio"
+                      name="department"
+                      value={dept}
+                      checked={formData.department === dept}
+                      onChange={(e) => setFormData({ ...formData, department: e.target.value })}
+                      className="peer sr-only"
+                    />
+                    <div className="w-5 h-5 border-2 border-[#F1F5F9]/30 peer-checked:border-[#F3A712] transition-colors" />
+                    <div className="absolute w-2.5 h-2.5 bg-[#F3A712] scale-0 peer-checked:scale-100 transition-transform" />
+                  </div>
+                  <span className="text-sm group-hover:text-[#F3A712] transition-colors">{dept}</span>
+                </label>
+              ))}
+            </div>
+            {formData.department === 'Other' && (
+              <motion.input
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                required
+                type="text"
+                placeholder="Please specify your department..."
+                value={formData.otherDepartment}
+                onChange={(e) => setFormData({ ...formData, otherDepartment: e.target.value })}
+                className="w-full bg-[#29335C] border border-[#F1F5F9]/20 p-3 focus:border-[#F3A712] outline-none transition-colors mt-2"
+              />
+            )}
           </div>
 
           {/* Current Level */}
