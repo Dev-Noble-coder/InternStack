@@ -113,13 +113,13 @@ export default function WaitlistPage() {
             We'll reach out to you soon with next steps and exclusive early-bird updates.
           </p>
           <div className="pt-6 border-t border-[#F1F5F9]/10">
-            <p className="text-sm font-medium text-[#F0CEA0]">
-              InternStack | Build your career, layer by layer.
+            <p className="text-sm font-medium text-[#F1F5F9]/80">
+              <span className='text-[#F0CEA0]'>Intern<span className='text-white'>Stack</span></span> | Build your career, layer by layer.
             </p>
           </div>
           <Link
             href="/"
-            className="mt-8 inline-block bg-[#F3A712] text-[#29335C] px-8 py-3 font-semibold shadow-[4px_4px_0px_0px_#FFF] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_#FFF] transition-all duration-200"
+            className="mt-8 inline-block bg-[#F3A712] text-[#29335C] px-8 py-3 font-medium text-sm shadow-[4px_4px_0px_0px_#FFF] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_#FFF] transition-all duration-200"
           >
             Back to Home
           </Link>
