@@ -40,6 +40,7 @@ const Footer: React.FC = () => {
                             <ul className="space-y-2 text-sm  text-[#29335C]/80">
                                 <li><Link href="/how-it-works" className="hover:text-[#F3A712]">How It Works</Link></li>
                                 <li><Link href="#" className="hover:text-[#F3A712]">Privacy Policy</Link></li>
+                                <li><Link href="/waitlist" className="hover:text-[#F3A712]">Join the Waitlist</Link></li>
                             </ul>
                         </div>
                         <div className="space-y-4">

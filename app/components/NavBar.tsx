@@ -4,9 +4,13 @@ import Link from 'next/link';
 import { Layers, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
+import { usePathname } from 'next/navigation';
 
 const NavBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isActive = (path: string) => pathname === path;
 
   // Scroll locking logic
   useEffect(() => {
@@ -37,10 +41,10 @@ const NavBar = () => {
           {/* Navigation Links */}
           <div className="hidden md:flex items-center gap-10 1">
             <div className="flex items-center gap-8 text-[#F1F5F9]/80 text-xs font-medium">
-              <Link href="/" className="hover:text-[#F3A712] transition-all duration-300">
+              <Link href="/" className={`${isActive('/') ? 'text-[#F3A712]' : 'text-[#F1F5F9]/80'} hover:text-[#F3A712] transition-all duration-300`}>
                 Home
               </Link>
-              <Link href="/how-it-works" className="hover:text-[#F3A712] transition-all duration-300">
+              <Link href="/how-it-works" className={`${isActive('/how-it-works') ? 'text-[#F3A712]' : 'text-[#F1F5F9]/80'} hover:text-[#F3A712] transition-all duration-300`}>
                 How It Works
               </Link>
               <button onClick={() => toast.success('Coming soon!')} className="hover:text-[#F3A712] transition-all duration-300">
@@ -56,9 +60,7 @@ const NavBar = () => {
 
             <div className="pl-4 border-l border-[#F1F5F9]/20">
               <Link
-                href="https://forms.gle/PzStD7NhaBzTJwgv5"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/waitlist"
                 className="bg-[#F3A712] text-[#29335C] px-6 py-2.5 shadow-[4px_4px_0px_0px_#FFF] text-xs font-bold hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_#FFF] active:translate-y-0 active:shadow-none transition-all duration-200 block"
               >
                 Join the WaitList
@@ -120,14 +122,14 @@ const NavBar = () => {
                 <Link
                   href="/"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="hover:text-[#F3A712] transition-colors"
+                  className={`${isActive('/') ? 'text-[#F3A712]' : 'text-[#F1F5F9]/80'} hover:text-[#F3A712] transition-colors`}
                 >
                   Home
                 </Link>
                 <Link
                   href="/how-it-works"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="hover:text-[#F3A712] transition-colors"
+                  className={`${isActive('/how-it-works') ? 'text-[#F3A712]' : 'text-[#F1F5F9]/80'} hover:text-[#F3A712] transition-colors`}
                 >
                   How It Works
                 </Link>
@@ -162,9 +164,7 @@ const NavBar = () => {
 
               <div className="mt-auto pb-10">
                 <Link
-                  href="https://forms.gle/PzStD7NhaBzTJwgv5"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/waitlist"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="flex items-center justify-center w-full bg-[#F3A712] text-[#29335C] px-6 py-4 shadow-[4px_4px_0px_0px_#FFF] text-sm font-semibold hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_#FFF] active:translate-y-0 active:shadow-none transition-all duration-200"
                 >

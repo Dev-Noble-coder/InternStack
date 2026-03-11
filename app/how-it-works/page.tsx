@@ -149,9 +149,7 @@ const HowItWorksPage: React.FC = () => {
                         className="flex flex-col sm:flex-row gap-4"
                     >
                         <Link
-                            href="https://forms.gle/PzStD7NhaBzTJwgv5"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                                href="/waitlist"
                             className="bg-[#F3A712] text-[#29335C] px-10 py-2.5 font-medium text-sm  tracking-wider flex items-center gap-2 shadow-[4px_4px_0px_0px_#FFF] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_#FFF] active:translate-y-0 active:shadow-none transition-all duration-200"
                         >
                             Join the Waitlist <ArrowRight size={18} strokeWidth={3} />
@@ -280,9 +278,7 @@ const HowItWorksPage: React.FC = () => {
 
                         <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto text-sm">
                             <Link
-                                href="https://forms.gle/PzStD7NhaBzTJwgv5"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                    href="/waitlist"
                                 className="bg-[#F3A712] text-[#29335C] px-10 py-2.5  uppercase tracking-widest flex items-center justify-center gap-2 
                    border-2 border-white
                    shadow-[4px_4px_0px_0px_#FFF] 
