@@ -159,7 +159,7 @@ export default function WaitlistPage() {
           className="mb-12"
         >
           <h1 className="text-3xl md:text-5xl font-extrabold mb-6">
-            InternStack: Join the 2026 SIWES Waitlist 🚀
+            InternStack: Join the 2026 SIWES Waitlist 
           </h1>
           <div className="h-1 w-20 bg-[#F3A712] mb-8" />
 
@@ -169,16 +169,16 @@ export default function WaitlistPage() {
             </p>
             <p>By joining the waitlist, you'll get early access to:</p>
             <ul className="space-y-3">
-              <li className="flex items-start gap-3">
-                <span className="text-xl">✨</span>
+              <li className="list-disc list-inside">
+                
                 <span><span className="font-bold text-[#F1F5F9]">AI CV Builder:</span> Tech-ready resumes in minutes.</span>
               </li>
-              <li className="flex items-start gap-3">
-                <span className="text-xl">📓</span>
+              <li className="list-disc list-inside">
+               
                 <span><span className="font-bold text-[#F1F5F9]">Logbook Assistant:</span> Error-free daily entries that meet ITF standards.</span>
               </li>
-              <li className="flex items-start gap-3">
-                <span className="text-xl">🏢</span>
+              <li className="list-disc list-inside">
+                
                 <span><span className="font-bold text-[#F1F5F9]">Verified Directory:</span> Direct access to top tech companies accepting interns.</span>
               </li>
             </ul>
