@@ -8,6 +8,7 @@ import toast from 'react-hot-toast';
 
 const UNIVERSITIES = [
   "Federal University of Oye",
+  "Thomas Adewumi University",
   "Achievers University Owo",
   "Abuad University",
   "Landmark University",
@@ -19,7 +20,7 @@ const UNIVERSITIES = [
 ];
 
 const LEVELS = ["100 lvl", "200 lvl", "300 lvl", "400 lvl"];
-const DEPARTMENTS = ["Computer Science", "Computer Engineering", "Other"];
+const DEPARTMENTS = ["Computer Science", "Computer Engineering", "Software Engineering", "Other"];
 const DURATIONS = ["3 months", "6 months"];
 const CHALLENGES = [
   "Finding a company that accepts SIWES students",
