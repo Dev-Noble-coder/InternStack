@@ -1,23 +1,288 @@
 "use client";
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Layers, CheckCircle2, AlertCircle, Loader2, ArrowLeft } from 'lucide-react';
+import { Layers, CheckCircle2, AlertCircle, Loader2, ArrowLeft, Search, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 import { supabase } from '../lib/supabase';
 import toast from 'react-hot-toast';
 
 const UNIVERSITIES = [
-  "Federal University of Oye",
+  "Abdu Gusau Polytechnic, Talata-Mafara",
+  "Abia State Polytechnic, Aba",
+  "Abia State University, Uturu",
+  "Abubakar Tafawa Balewa University, Bauchi",
+  "Abubakar Tatari Ali Polytechnic, Bauchi",
+  "Achi Polytechnic, Aba",
+  "Achievers University, Owo",
+  "Adamawa State Polytechnic, Yola",
+  "Adamawa State University, Mubi",
+  "Adekunle Ajasin University, Akungba-Akoko",
+  "Adeleke University, Ede",
+  "Admiralty University of Nigeria, Ibusa",
+  "Afe Babalola University, Ado-Ekiti",
+  "African University of Science and Technology, Abuja",
+  "Ahmadu Bello University, Zaria",
+  "Air Force Institute of Technology, Kaduna",
+  "Ajayi Crowther University, Oyo",
+  "Akperan Orshi College of Agriculture, Yandev",
+  "Akwa Ibom State College of Art and Industrial Design, Akim",
+  "Akwa Ibom State Polytechnic, Ikot Osurua",
+  "Akwa Ibom State University, Ikot Akpaden",
+  "Al-Hikmah University, Ilorin",
+  "Al-Qalam University, Katsina",
+  "Allover Central Polytechnic, Sango-Ota",
+  "Alma Institute of Technology, Gombe",
+  "Ambrose Alli University, Ekpoma",
+  "American University of Nigeria, Yola",
+  "Anchor University, Ayobo, Lagos",
+  "Animal Husbandry Training School, Central Farm",
+  "Ancilla College of Health, Ilorin",
+  "Arthur Jarvis University, Akpabuyo",
+  "Assanus Polytechnic, Oyo",
+  "Atiba University, Oyo",
+  "Augustine University, Ilara",
+  "Azman College of Medical Sciences, Kano",
+  "Babcock University, Ilishan-Remo",
+  "Bauchi Institute of Arabic and Islamic Studies, Bauchi",
+  "Bayero University, Kano",
+  "Baze University, Abuja",
+  "Bells University of Technology, Ota",
+  "Benue State Polytechnic, Ugbokolo",
+  "Benue State University, Makurdi",
+  "Benson Idahosa University, Benin City",
+  "Bingham University, Karu",
+  "Bolingo Radio and Television Academy, Abuja",
+  "Borno State University, Maiduguri",
+  "Bowen University, Iwo",
+  "Caleb University, Imota",
+  "Capital City Polytechnic, Abuja",
+  "Centre for Management Development",
+  "Chrisland University, Owode",
+  "Christopher University, Mowe",
+  "Chukwuemeka Odumegwu Ojukwu University, Uli",
+  "Clifford University, Owerrinta",
+  "Coal City University, Enugu",
+  "College of Administration and Management Studies, Potiskum",
+  "College of Health Technology, Calabar",
+  "College of Technology, Igbesa",
+  "Confluence College of Education, Pingare",
+  "Covenant Polytechnic, Aba",
+  "Covenant University, Ota",
+  "Crawford University, Igbesa",
+  "Crescent University, Abeokuta",
+  "Cross River University of Technology, Calabar",
+  "Crown Hill University, Eiyenkorin",
+  "Crown Polytechnic, Ado-Ekiti",
+  "D.S. Adegbenro ICT Polytechnic, Itori",
+  "Delta State Polytechnic, Ogwashi-Uku",
+  "Delta State Polytechnic, Oghara",
+  "Delta State Polytechnic, Ozoro",
+  "Delta State School of Marine Technology, Burutu",
+  "Delta State University, Abraka",
+  "Dominican University, Ibadan",
+  "Dominion University, Ibadan",
+  "Ebonyi State University, Abakaliki",
+  "Edo State Polytechnic, Usen",
+  "Edo University, Iyamho",
+  "Edwin Clark University, Kiagbodo",
+  "Eko University of Medicine and Health Sciences, Ijanikin",
+  "Ekiti State University, Ado-Ekiti",
+  "Eksa University, Ipara-Remo",
+  "Elizade University, Ilara-Mokin",
+  "Enugu State Polytechnic, Iwollo",
+  "Enugu State University of Science and Technology, Enugu",
+  "Evangel University, Akaeze",
+  "Federal Polytechnic, Ado-Ekiti",
+  "Federal Polytechnic, Akanu Ibiam, Unwana",
+  "Federal Polytechnic, Bauchi",
+  "Federal Polytechnic, Bali",
+  "Federal Polytechnic, Bida",
+  "Federal Polytechnic, Damaturu",
+  "Federal Polytechnic, Ede",
+  "Federal Polytechnic, Ekowe",
+  "Federal Polytechnic, Idah",
+  "Federal Polytechnic, Ilaro",
+  "Federal Polytechnic, Kaura Namoda",
+  "Federal Polytechnic, Monguno",
+  "Federal Polytechnic, Mubi",
+  "Federal Polytechnic, Nasarawa",
+  "Federal Polytechnic, Nekede",
+  "Federal Polytechnic, Offa",
+  "Federal Polytechnic, Oko",
+  "Federal Polytechnic, Wannune",
+  "Federal School of Surveying, Oyo",
+  "Federal University of Agriculture, Abeokuta",
+  "Federal University of Petroleum Resources, Effurun",
+  "Federal University of Technology, Akure",
+  "Federal University of Technology, Minna",
+  "Federal University of Technology, Owerri",
+  "Federal University, Birnin Kebbi",
+  "Federal University, Dutse",
+  "Federal University, Dutsin-Ma",
+  "Federal University, Gashua",
+  "Federal University, Gusau",
+  "Federal University, Kashere",
+  "Federal University, Lafia",
+  "Federal University, Lokoja",
+  "Federal University, Ndufu-Alike",
+  "Federal University, Otuoke",
+  "Federal University, Oye-Ekiti",
+  "Federal University, Wukari",
+  "Fidei Polytechnic, Gboko",
+  "Fountain College of Education, Osogbo",
+  "Fountain University, Osogbo",
+  "Gateway ICT Polytechnic, Igbesa",
+  "Gateway ICT Polytechnic, Saapade",
+  "Global Polytechnic, Akure",
+  "Godfrey Okoye University, Ugwuomu-Nike",
+  "Gombe State University, Gombe",
+  "Grace Polytechnic, Surulere",
+  "Greenfield University, Kaduna",
+  "Greenwich Polytechnic, Aba",
+  "Gregory University, Uturu",
+  "Hallmark University, Ijebu-Itele",
+  "Haruna Adu Polytechnic, Gombe",
+  "Heritage Polytechnic, Ikot Udota",
+  "Hezekiah University, Umudi",
+  "Hussaini Adamu Federal Polytechnic, Kazaure",
+  "Ibrahim Badamasi Babangida College of Agriculture, Mokwa",
+  "Ibrahim Badamasi Babangida University, Lapai",
+  "Igbajo Polytechnic",
+  "Igbinedion University, Okada",
+  "Ikorodu City Polytechnic",
+  "Imo State Polytechnic, Umuagwo",
+  "Imo State University, Owerri",
+  "Interlink Polytechnic, IJebu-Jesa",
+  "J-K Polytechnic, Ojoku",
+  "Jabir Abu Muhammad College of Legal and General Studies, Suleja",
+  "Joseph Ayo Babalola University, Ikeji-Arakeji",
+  "Kaduna Polytechnic, Kaduna",
+  "Kaduna State University, Kaduna",
+  "Kano State Polytechnic, Kano",
+  "Kano University of Science and Technology, Wudil",
+  "Katsina State Institute of Technology and Management, Katsina",
+  "Kebbi State University of Science and Technology, Aliero",
+  "Kingdom Polytechnic, Ubiaja",
+  "Kings University, Odeomu",
+  "Kogi State Polytechnic, Lokoja",
+  "Kogi State University, Anyigba",
+  "Kwara State Polytechnic, Ilorin",
+  "Kwara State University, Malete",
+  "Kwararafa College of Education, Zing",
+  "Kwararafa University, Wukari",
+  "Ladoke Akintola University of Technology, Ogbomoso",
+  "Lagos City Polytechnic, Ikeja",
+  "Lagos State Polytechnic, Ikorodu",
+  "Lagos State University of Science and Technology, Ikorodu",
+  "Lagos State University, Ojo",
+  "Landmark University, Omu-Aran",
+  "Lead City University, Ibadan",
+  "Legacy University, Okija",
+  "Lens Polytechnic, Offa",
+  "Lighthouse Polytechnic, Benin City",
+  "Madonna University, Okija",
+  "Maranatha Polytechnic, Oyo",
+  "Mcpherson University, Seriki Sotayo",
+  "Michael Okpara University of Agriculture, Umudike",
+  "Modibbo Adama University of Technology, Yola",
+  "Moshood Abiola Polytechnic, Abeokuta",
+  "Mountain Top University, Makogi Oba",
+  "Mudiame College of Polytechnic, Irrua",
+  "Nasarawa State University, Keffi",
+  "Niger Delta University, Wilberforce Island",
+  "Nigerian Army University Biu",
+  "Nigerian College of Aviation Technology, Zaria",
+  "Nigerian Institute of Journalism, Lagos",
+  "Nigerian Navy School of Health Sciences, Offa",
+  "Nile University of Nigeria, Abuja",
+  "Nnamdi Azikiwe University, Awka",
+  "Nok Polytechnic, Kachia",
+  "Northwest University, Kano",
+  "Novena University, Ogume",
+  "Nuhu Bamalli Polytechnic, Zaria",
+  "Obafemi Awolowo University, Ile-Ife",
+  "Obong University, Obong Ntak",
+  "Oduduwa University, Ipetumodu",
+  "Ogun State Institute of Technology, Igbesa",
+  "Olabisi Onabanjo University, Ago-Iwoye",
+  "Ondo State Polytechnic, Ore",
+  "Ondo State University of Science and Technology, Okitipupa",
+  "Osun State College of Technology, Esa-Oke",
+  "Osun State Polytechnic, Iree",
+  "Osun State University, Osogbo",
+  "Our Saviour Institute of Science and Technology, Enugu",
+  "Oyo State College of Agriculture, Igbo-Ora",
+  "Pan-Atlantic University, Lagos",
+  "Paul University, Awka",
+  "Petroleum Training Institute, Effurun",
+  "Picah Polytechnic, Ikot Ekpene",
+  "Plateau State Polytechnic, Barkin Ladi",
+  "Plateau State University, Bokkos",
+  "Polytechnic of Sokoto State, Sokoto",
+  "Precious Cornerstone University, Ibadan",
+  "Redeemer's University, Ede",
+  "Renaissance University, Enugu",
+  "Rhema University, Aba",
+  "Rivers State Polytechnic, Bori",
+  "Rivers State University, Port Harcourt",
+  "Ronik Polytechnic, Lagos",
+  "Rufus Giwa Polytechnic, Owo",
+  "Saba'ah College of Polytechnic, Kaduna",
+  "Salem University, Lokoja",
+  "Samuel Adegboyega University, Ogwa",
+  "Savannah Institute of Technology, Bauchi",
+  "Scholars Polytechnic, Oyo",
+  "Shaka Polytechnic, Benin City",
+  "Skyline University Nigeria, Kano",
+  "Sokoto State Polytechnic, Sokoto",
+  "Sokoto State University, Sokoto",
+  "St. John's Polytechnic, Kengere",
+  "St. Mary Polytechnic, Kwamba",
+  "Sule Lamido University, Kafin Hausa",
+  "Summit University, Offa",
+  "Sure Foundation Polytechnic, Ikot Akai",
+  "Tai Solarin University of Education, Ijebu-Ode",
+  "Tansian University, Umunya",
+  "Taraba State University, Jalingo",
+  "Technical University, Ibadan",
+  "The Oke Ogun Polytechnic, Saki",
+  "The Polytechnic, Ibadan",
+  "The Polytechnic, Ijebu Igbo",
+  "The Polytechnic, Ile-Ife",
+  "The Polytechnic, Ikorodu",
   "Thomas Adewumi University",
-  "Achievers University Owo",
-  "Abuad University",
-  "Landmark University",
-  "Ekiti State University",
-  "University of Ibadan",
-  "Federal University of Technology Akure",
-  "University of Lagos",
-  "Obafemi Awolowo University Ife",
-  "University of Benin"
+  "Tower Polytechnic, Ibadan",
+  "Umaru Ali Shinkafi Polytechnic, Sokoto",
+  "Umaru Musa Yar'Adua University, Katsina",
+  "University of Abuja, Abuja",
+  "University of Africa, Toru-Orua",
+  "University of Agriculture, Makurdi",
+  "University of Benin, Benin City",
+  "University of Calabar, Calabar",
+  "University of Ibadan, Ibadan",
+  "University of Ilorin, Ilorin",
+  "University of Jos, Jos",
+  "University of Lagos, Lagos",
+  "University of Maiduguri, Maiduguri",
+  "University of Mkar, Mkar",
+  "University of Nigeria, Nsukka",
+  "University of Port Harcourt, Port Harcourt",
+  "University of Uyo, Uyo",
+  "Usmanu Danfodiyo University, Sokoto",
+  "Valley View Polytechnic, Ohafia",
+  "Veritas University, Abuja",
+  "Waziri Umaru Federal Polytechnic, Birnin Kebbi",
+  "Wellspring University, Benin City",
+  "Western Delta University, Oghara",
+  "Wolex Polytechnic, Ikeja",
+  "Wolex Polytechnic, Surulere",
+  "Yaba College of Technology, Yaba",
+  "Yobe State University, Damaturu",
+  "Yusuf Bala Usman College of Legal and General Studies, Daura",
+  "Yusuf Maitama Sule University, Kano",
+  "Zagazola College of Aviation Technology, Kano",
+  "Zaria City Polytechnic, Zaria",
+  "Other"
 ];
 
 const LEVELS = ["100 lvl", "200 lvl", "300 lvl", "400 lvl"];
@@ -36,6 +301,7 @@ interface FormData {
   fullName: string;
   whatsappNumber: string;
   university: string;
+  otherUniversity?: string;
   level: string;
   department: string;
   otherDepartment?: string;
@@ -45,12 +311,81 @@ interface FormData {
   otherSource?: string;
 }
 
+function SchoolCombobox({ value, onChange }: { value: string, onChange: (val: string) => void }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  
+  const filteredSchools = UNIVERSITIES.filter(school => 
+    school.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  return (
+    <div className="relative">
+      <div 
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full bg-[#29335C] border border-[#F1F5F9]/20 p-3 flex items-center justify-between cursor-pointer focus-within:border-[#F3A712] transition-colors"
+      >
+        <span className={value ? "text-[#F1F5F9]" : "text-[#F1F5F9]/40"}>
+          {value || "Select your institution..."}
+        </span>
+        <ChevronDown size={20} className={`text-[#F3A712] transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+      </div>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="absolute z-50 w-full mt-2 bg-[#1A2341] border border-[#F1F5F9]/10 shadow-2xl max-h-60 overflow-hidden flex flex-col"
+          >
+            <div className="p-3 border-b border-[#F1F5F9]/10 flex items-center gap-2 bg-[#29335C]">
+              <Search size={16} className="text-[#F3A712]" />
+              <input
+                autoFocus
+                type="text"
+                placeholder="Search schools..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="bg-transparent border-none outline-none text-sm w-full"
+                onClick={(e) => e.stopPropagation()}
+              />
+            </div>
+            <div className="overflow-y-auto custom-scrollbar">
+              {filteredSchools.length > 0 ? (
+                filteredSchools.map((school) => (
+                  <div
+                    key={school}
+                    onClick={() => {
+                      onChange(school);
+                      setIsOpen(false);
+                      setSearchTerm('');
+                    }}
+                    className="p-3 text-sm hover:bg-[#F3A712] hover:text-[#29335C] cursor-pointer transition-colors border-b border-[#F1F5F9]/5 last:border-none"
+                  >
+                    {school}
+                  </div>
+                ))
+              ) : (
+                <div className="p-4 text-sm text-[#F1F5F9]/40 text-center">
+                  No schools found. Try selecting "Other"
+                </div>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 export default function WaitlistPage() {
   const [formData, setFormData] = useState<FormData>({
     email: '',
     fullName: '',
     whatsappNumber: '',
     university: '',
+    otherUniversity: '',
     level: '',
     department: '',
     otherDepartment: '',
@@ -85,7 +420,7 @@ export default function WaitlistPage() {
           email: formData.email,
           full_name: formData.fullName,
           whatsapp_number: formData.whatsappNumber,
-          university: formData.university,
+          university: formData.university === 'Other' ? formData.otherUniversity : formData.university,
           department: formData.department === 'Other' ? formData.otherDepartment : formData.department,
           current_level: formData.level,
           siwes_duration: formData.duration,
@@ -251,26 +586,22 @@ export default function WaitlistPage() {
           {/* University */}
           <div className="space-y-4">
             <label className="block text-sm font-bold uppercase tracking-wider text-[#F0CEA0]">University *</label>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {UNIVERSITIES.map((uni) => (
-                <label key={uni} className="flex items-center gap-3 cursor-pointer group">
-                  <div className="relative flex items-center justify-center">
-                    <input
-                      required
-                      type="radio"
-                      name="university"
-                      value={uni}
-                      checked={formData.university === uni}
-                      onChange={(e) => setFormData({ ...formData, university: e.target.value })}
-                      className="peer sr-only"
-                    />
-                    <div className="w-5 h-5 border-2 border-[#F1F5F9]/30 peer-checked:border-[#F3A712] transition-colors" />
-                    <div className="absolute w-2.5 h-2.5 bg-[#F3A712] scale-0 peer-checked:scale-100 transition-transform" />
-                  </div>
-                  <span className="text-sm group-hover:text-[#F3A712] transition-colors">{uni}</span>
-                </label>
-              ))}
-            </div>
+            <SchoolCombobox 
+              value={formData.university}
+              onChange={(val) => setFormData({ ...formData, university: val })}
+            />
+            {formData.university === 'Other' && (
+              <motion.input
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                required
+                type="text"
+                placeholder="Please specify your university..."
+                value={formData.otherUniversity}
+                onChange={(e) => setFormData({ ...formData, otherUniversity: e.target.value })}
+                className="w-full bg-[#29335C] border border-[#F1F5F9]/20 p-3 focus:border-[#F3A712] outline-none transition-colors mt-2"
+              />
+            )}
           </div>
 
           {/* Department */}
