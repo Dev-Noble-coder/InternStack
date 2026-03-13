@@ -270,6 +270,7 @@ const UNIVERSITIES = [
   "University of Uyo, Uyo",
   "Usmanu Danfodiyo University, Sokoto",
   "Valley View Polytechnic, Ohafia",
+  "Venite University, Iloro Ekiti",
   "Veritas University, Abuja",
   "Waziri Umaru Federal Polytechnic, Birnin Kebbi",
   "Wellspring University, Benin City",
