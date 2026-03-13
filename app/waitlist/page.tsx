@@ -16,7 +16,8 @@ const UNIVERSITIES = [
   "University of Ibadan",
   "Federal University of Technology Akure",
   "University of Lagos",
-  "Obafemi Awolowo University Ife"
+  "Obafemi Awolowo University Ife",
+  "University of Benin"
 ];
 
 const LEVELS = ["100 lvl", "200 lvl", "300 lvl", "400 lvl"];
