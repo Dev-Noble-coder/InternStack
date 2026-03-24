@@ -22,6 +22,28 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   title: "Intern Stack",
   description: "Build your career, layer by layer.",
+  keywords: ["internship", "career", "students", "jobs", "tech jobs", "intern stack"],
+  openGraph: {
+    title: "Intern Stack",
+    description: "Build your career, layer by layer.",
+    url: "https://internstack.com",
+    siteName: "Intern Stack",
+    images: [
+      {
+        url: "/icon.png",
+        width: 800,
+        height: 600,
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Intern Stack",
+    description: "Build your career, layer by layer.",
+    images: ["/icon.png"],
+  },
 };
 
 export default function RootLayout({
