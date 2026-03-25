@@ -22,11 +22,11 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   title: "Intern Stack",
   description: "Build your career, layer by layer.",
-  keywords: ["internship", "career", "students", "jobs", "tech jobs", "intern stack"],
+  keywords: ["siwes", "internship", "career", "students", "jobs", "tech jobs", "intern stack"],
   openGraph: {
     title: "Intern Stack",
     description: "Build your career, layer by layer.",
-    url: "https://internstack.com",
+    url: "https://internstack.com.ng",
     siteName: "Intern Stack",
     images: [
       {
