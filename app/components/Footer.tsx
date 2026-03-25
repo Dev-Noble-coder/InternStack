@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import Link from 'next/link';
-import { Github, Twitter, Linkedin, Layers } from 'lucide-react';
+import { Github, Twitter, Linkedin, Layers, Mail } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
 
 const Footer: React.FC = () => {
@@ -51,12 +51,27 @@ const Footer: React.FC = () => {
                         </div>
                         <div className="space-y-4">
                             <h4 className="font-black uppercase text-xs tracking-widest text-[#29335C]">Contact</h4>
-                            <ul className="space-y-2 text-sm text-[#29335C]/80">
+                            <ul className="space-y-3 text-sm text-[#29335C]/80">
                                 <li>
-                                    <Link href="https://wa.me/2347075688609" className="hover:text-[#F3A712] flex items-center gap-1 text-sm font-bold">
-                                        <FaWhatsapp size={18} className="text-[#25D366]" /> 07075688609
+                                    <Link href="https://wa.me/2347075688609" className="hover:text-[#F3A712] flex items-center gap-2 text-sm font-bold">
+                                        <FaWhatsapp size={16} className="text-[#25D366]" /> 07075688609
                                     </Link>
                                 </li>
+                                <li>
+                                    <Link href="mailto:hello@internstack.com.ng" className="hover:text-[#F3A712] flex items-center gap-2 text-xs font-semibold">
+                                        <Mail size={14} className="text-[#29335C]" /> hello@internstack.com.ng
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="mailto:admin@internstack.com.ng" className="hover:text-[#F3A712] flex items-center gap-2 text-xs font-semibold">
+                                        <Mail size={14} className="text-[#29335C]" /> admin@internstack.com.ng
+                                    </Link>
+                                </li>
+                                {/* <li>
+                                    <Link href="mailto:partnerships@internstack.com.ng" className="hover:text-[#F3A712] flex items-center gap-2 text-xs font-semibold">
+                                        <Mail size={14} className="text-[#29335C]" /> partnerships@internstack.com.ng
+                                    </Link>
+                                </li> */}
                             </ul>
                         </div>
                     </div>
