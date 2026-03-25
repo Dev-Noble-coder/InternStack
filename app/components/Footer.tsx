@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
                             The ultimate SIWES engine for students. Generate professional CVs, master your logbook, and access SIWES opportunities from top Nigerian companies.
                         </p>
                         <div className="flex gap-4">
-                            {[Github, Twitter, Linkedin].map((Icon, i) => (
+                            {[Twitter, Linkedin].map((Icon, i) => (
                                 <Link key={i} href="#" className="p-2 border-2 border-[#29335C] text-[#29335C]  transition-colors shadow-[3px_3px_0px_0px_#29335C] active:translate-y-0.5 active:shadow-none">
                                     <Icon size={20} />
                                 </Link>
