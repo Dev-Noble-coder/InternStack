@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
 import { Layers, Rocket, ArrowRight, Play } from 'lucide-react';
 
@@ -94,7 +95,7 @@ const HeroSection: React.FC = () => {
           className="relative w-full mt-16 group"
         >
           {/* Browser Top Bar */}
-          <div className="w-full bg-[#F0CEA0] h-10 rounded-t-lg flex items-center px-4 gap-1.5 border-b border-[#534D41]/10">
+          <div className="w-full bg-[#F0CEA0] h-8 rounded-t-lg flex items-center px-4 gap-1.5 border-b border-[#534D41]/10">
             <div className="w-3 h-3 rounded-full bg-[#DB2B39]" />
             <div className="w-3 h-3 rounded-full bg-[#F3A712]" />
             <div className="w-3 h-3 rounded-full bg-[#29335C]/20" />
@@ -102,15 +103,23 @@ const HeroSection: React.FC = () => {
 
           {/* Browser Content / Video Placeholder */}
           <div className="w-full aspect-video bg-[#F0CEA0] rounded-b-2xl shadow-2xl flex items-center justify-center relative overflow-hidden border-x border-b border-[#534D41]/10">
-            {/* Play Button Overlay */}
-            <div className="w-20 h-20 rounded-full bg-[#29335C]/90 backdrop-blur-md flex items-center justify-center text-[#F3A712] shadow-xl group-hover:scale-110 transition-transform duration-300 cursor-pointer z-20">
-              <Play size={32} fill="currentColor" />
-            </div>
+            
+            {/* The Image inside the frame */}
+            <Image 
+              src="/hero-image.jpg" 
+              alt="InternStack Platform Preview or Students Learning" 
+              fill 
+              className="object-cover relative z-0 transition-transform duration-700 group-hover:scale-105"
+              priority
+            />
 
-            {/* Decorative Background for Mockup */}
-            <div className="absolute inset-0 opacity-20 pointer-events-none">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full border-2 border-dashed border-[#534D41]/30 rounded-full animate-pulse" />
-            </div>
+            {/* Optional Dark Overlay so the play button stands out more against the image */}
+            <div className="absolute inset-0 bg-[#29335C]/30 z-10 pointer-events-none transition-opacity duration-300 group-hover:bg-[#29335C]/10" />
+
+            {/* Play Button Overlay */}
+            {/* <div className="w-15 h-15 lg:w-20 lg:h-20 rounded-full bg-[#29335C]/90 backdrop-blur-md flex items-center justify-center text-[#F3A712] shadow-xl group-hover:scale-110 transition-transform duration-300 cursor-pointer z-20">
+              <Play size={25} fill="currentColor" />
+            </div> */}
           </div>
         </motion.div>
       </div>
