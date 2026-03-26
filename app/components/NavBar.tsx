@@ -46,6 +46,9 @@ const NavBar = () => {
               <Link href="/how-it-works" className={`${isActive('/how-it-works') ? 'text-[#F3A712]' : 'text-[#F1F5F9]/80'} hover:text-[#F3A712] transition-all duration-300`}>
                 How It Works
               </Link>
+              <Link href="/contact-us" className={`${isActive('/contact-us') ? 'text-[#F3A712]' : 'text-[#F1F5F9]/80'} hover:text-[#F3A712] transition-all duration-300`}>
+                Contact Us
+              </Link>
               <button onClick={() => toast.success('Coming soon!')} className="hover:text-[#F3A712] transition-all duration-300">
                 Company Directory
               </button>
@@ -82,7 +85,7 @@ const NavBar = () => {
       {/* Mobile Sidebar Overlay - Moved outside of the <nav> element for proper backdrop behavior */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <div className="fixed inset-0 z-[100] md:hidden">
+          <div className="fixed inset-0 z-100 md:hidden">
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
