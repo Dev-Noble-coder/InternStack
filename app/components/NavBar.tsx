@@ -135,6 +135,13 @@ const NavBar = () => {
                 >
                   How It Works
                 </Link>
+                <Link
+                  href="/contact-us"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`${isActive('/how-it-works') ? 'text-[#F3A712]' : 'text-[#F1F5F9]/80'} hover:text-[#F3A712] transition-colors`}
+                >
+                  Contact Us
+                </Link>
                 <button
                   onClick={() => {
                     toast.success('Coming soon!');
