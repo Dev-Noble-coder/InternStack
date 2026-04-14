@@ -20,12 +20,19 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Intern Stack",
-  description: "Build your career, layer by layer.",
-  keywords: ["siwes", "internship", "career", "students", "jobs", "tech jobs", "intern stack"],
+  metadataBase: new URL('https://internstack.com.ng'),
+  title: {
+    default: "Intern Stack | Build your career, layer by layer.",
+    template: "%s | Intern Stack",
+  },
+  description: "Intern Stack is the ultimate engine for Nigerian students to master their SIWES journey.",
+  keywords: ["siwes", "internship", "career", "students", "jobs", "tech jobs", "intern stack", "nigeria pre-internship", "itf"],
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
-    title: "Intern Stack",
-    description: "Build your career, layer by layer.",
+    title: "Intern Stack | Build your career, layer by layer.",
+    description: "Intern Stack is the ultimate engine for Nigerian students to master their SIWES journey.",
     url: "https://internstack.com.ng",
     siteName: "Intern Stack",
     images: [
@@ -33,6 +40,7 @@ export const metadata: Metadata = {
         url: "/icon.png",
         width: 800,
         height: 600,
+        alt: "Intern Stack Logo",
       },
     ],
     locale: "en_US",
@@ -40,8 +48,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Intern Stack",
-    description: "Build your career, layer by layer.",
+    title: "Intern Stack | Build your career, layer by layer.",
+    description: "Intern Stack is the ultimate engine for Nigerian students to master their SIWES journey.",
     images: ["/icon.png"],
   },
 };
