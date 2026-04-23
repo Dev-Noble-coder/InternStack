@@ -3,6 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import { motion, Variants } from 'framer-motion';
 import { ArrowRight, FileQuestion, ScrollText, Building2 } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 const breakVariants = (direction: 'left' | 'right' | 'up'): Variants => ({
     initial: {
@@ -182,17 +183,15 @@ const Solution: React.FC = () => {
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto text-sm">
-                        <Link
-                            href="/waitlist"
-                            className="bg-[#F3A712] text-[#29335C] px-10 py-2.5  uppercase tracking-widest flex items-center justify-center gap-2 
+                        <button
+                            onClick={() => toast.success('Shortlisting in progress... check back later!')}
+                            className="bg-[#F3A712]/50 text-[#29335C] px-10 py-2.5  uppercase tracking-widest flex items-center justify-center gap-2 
                    border-2 border-white
                    shadow-[4px_4px_0px_0px_#FFF] 
-                   hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_#FFF] 
-                   active:translate-y-0.5 active:shadow-[2px_2px_0px_0px_#FFF] 
-                   transition-all duration-200"
+                   transition-all duration-200 cursor-not-allowed"
                         >
-                            JOIN THE WAITLIST <ArrowRight size={20} strokeWidth={3} />
-                        </Link>
+                            SHORTLIST IN PROGRESS...
+                        </button>
 
                     </div>
                 </div>

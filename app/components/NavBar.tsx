@@ -61,12 +61,12 @@ const NavBar = () => {
             </div>
 
             <div className="pl-4 border-l border-[#F1F5F9]/20">
-              <Link
-                href="/waitlist"
-                className="bg-[#F3A712] text-[#29335C] px-6 py-2.5 shadow-[4px_4px_0px_0px_#FFF] text-xs font-bold hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_#FFF] active:translate-y-0 active:shadow-none transition-all duration-200 block"
+              <button
+                onClick={() => toast.success('Shortlisting in progress... check back later!')}
+                className="bg-[#F3A712]/50 text-[#29335C] px-6 py-2.5 shadow-[4px_4px_0px_0px_#FFF] text-xs font-bold transition-all duration-200 block cursor-not-allowed"
               >
-                Join the WaitList
-              </Link>
+                Shortlist in progress...
+              </button>
             </div>
           </div>
 
@@ -172,13 +172,15 @@ const NavBar = () => {
               </div>
 
               <div className="mt-auto pb-10">
-                <Link
-                  href="/waitlist"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-center w-full bg-[#F3A712] text-[#29335C] px-6 py-4 shadow-[4px_4px_0px_0px_#FFF] text-sm font-semibold hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_#FFF] active:translate-y-0 active:shadow-none transition-all duration-200"
+                <button
+                  onClick={() => {
+                    toast.success('Shortlisting in progress... check back later!');
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="flex items-center justify-center w-full bg-[#F3A712]/50 text-[#29335C] px-6 py-4 shadow-[4px_4px_0px_0px_#FFF] text-sm font-semibold transition-all duration-200 cursor-not-allowed"
                 >
-                  JOIN THE WAITLIST
-                </Link>
+                  SHORTLIST IN PROGRESS...
+                </button>
               </div>
             </motion.div>
           </div>

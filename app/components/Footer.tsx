@@ -3,6 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Github, Twitter, Linkedin, Layers, Mail } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
+import toast from 'react-hot-toast';
 
 const Footer: React.FC = () => {
     const currentYear = new Date().getFullYear();
@@ -41,7 +42,7 @@ const Footer: React.FC = () => {
                                 <li><Link href="/how-it-works" className="hover:text-[#F3A712]">How It Works</Link></li>
                                 <li><Link href="/contact-us" className="hover:text-[#F3A712]">Contact Us</Link></li>
                                 <li><Link href="#" className="hover:text-[#F3A712]">Privacy Policy</Link></li>
-                                <li><Link href="/waitlist" className="hover:text-[#F3A712]">Join the Waitlist</Link></li>
+                                <li><button onClick={() => toast.success('Shortlisting in progress... check back later!')} className="hover:text-[#F3A712] text-left opacity-60 cursor-not-allowed">Shortlist in progress...</button></li>
                             </ul>
                         </div>
                         <div className="space-y-4">

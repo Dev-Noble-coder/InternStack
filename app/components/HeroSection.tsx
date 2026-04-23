@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
 import { Layers, Rocket, ArrowRight, Play } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 const HeroSection: React.FC = () => {
   const floatVariants = (duration: number = 3, delay: number = 0): Variants => ({
@@ -73,12 +74,12 @@ const HeroSection: React.FC = () => {
           transition={{ delay: 0.3 }}
           className="flex flex-col sm:flex-row-reverse gap-4 w-full sm:w-auto text-sm"
         >
-          <Link
-            href="/waitlist"
-            className="bg-[#F3A712] text-[#29335C] px-10 py-2.5 font-bold flex items-center justify-center gap-2 shadow-[4px_4px_0px_0px_#FFF] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_#FFF] active:translate-y-0 active:shadow-none transition-all duration-200"
+          <button
+            onClick={() => toast.success('Shortlisting in progress... check back later!')}
+            className="bg-[#F3A712]/50 text-[#29335C] px-10 py-2.5 font-bold flex items-center justify-center gap-2 shadow-[4px_4px_0px_0px_#FFF] transition-all duration-200 cursor-not-allowed"
           >
-            Join the Waitlist <ArrowRight size={18} />
-          </Link>
+            Shortlist in progress...
+          </button>
           <Link
             href="/how-it-works"
             className="border-2 border-[#F3A712] text-[#F3A712] px-10 py-2.5 font-bold flex items-center justify-center gap-2 shadow-[4px_4px_0px_0px_rgba(243,167,18,0.3)] hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_0px_rgba(243,167,18,0.4)] active:translate-y-0 active:shadow-none transition-all duration-200"

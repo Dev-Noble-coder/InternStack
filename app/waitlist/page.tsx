@@ -497,9 +497,18 @@ export default function WaitlistPage() {
           className="mb-12"
         >
           <h1 className="text-3xl md:text-5xl font-extrabold mb-6">
-            InternStack: Join the 2026 SIWES Waitlist 
+            Shortlisting in Progress...
           </h1>
           <div className="h-1 w-20 bg-[#F3A712] mb-8" />
+
+          <div className="p-6 bg-[#F3A712]/10 border border-[#F3A712]/20 mb-8">
+            <p className="text-lg font-bold text-[#F3A712] mb-2">Waitlist is currently closed.</p>
+            <p className="text-sm text-[#F1F5F9]/80 leading-relaxed">
+              We are currently shortlisting students who have already joined the waitlist. 
+              We want to focus on providing the best experience for our early users first.
+              Please check back another time or follow us for updates.
+            </p>
+          </div>
 
           <div className="space-y-4 text-sm text-[#F1F5F9]/80 font-medium leading-relaxed">
             <p>
@@ -533,9 +542,14 @@ export default function WaitlistPage() {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2 }}
-          onSubmit={handleSubmit}
-          className="space-y-8 bg-[#1A2341]/50 p-8 md:p-12 border border-[#F1F5F9]/10 shadow-[8px_8px_0px_0px_#F1F5F9]/10"
+          onSubmit={(e) => {
+            e.preventDefault();
+            toast.error('Signups are currently closed for shortlisting.');
+          }}
+          className="space-y-8 bg-[#1A2341]/50 p-8 md:p-12 border border-[#F1F5F9]/10 shadow-[8px_8px_0px_0px_#F1F5F9]/10 opacity-60 pointer-events-none"
         >
+          {/* Form inputs commented out as shortlisting is in progress */}
+          {/*
           {error && (
             <div className="p-4 bg-red-500/10 border border-red-500/20 text-red-100 flex items-center gap-3">
               <AlertCircle size={20} />
@@ -544,7 +558,6 @@ export default function WaitlistPage() {
           )}
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Email */}
             <div className="space-y-3">
               <label className="block text-sm font-bold uppercase tracking-wider text-[#F0CEA0]">Email Address *</label>
               <input
@@ -557,7 +570,6 @@ export default function WaitlistPage() {
               />
             </div>
 
-            {/* Full Name */}
             <div className="space-y-3">
               <label className="block text-sm font-bold uppercase tracking-wider text-[#F0CEA0]">Full Name *</label>
               <input
@@ -570,7 +582,6 @@ export default function WaitlistPage() {
               />
             </div>
 
-            {/* WhatsApp Number */}
             <div className="space-y-3 lg:col-span-2">
               <label className="block text-sm font-bold uppercase tracking-wider text-[#F0CEA0]">WhatsApp Number *</label>
               <input
@@ -584,7 +595,6 @@ export default function WaitlistPage() {
             </div>
           </div>
 
-          {/* University */}
           <div className="space-y-4">
             <label className="block text-sm font-bold uppercase tracking-wider text-[#F0CEA0]">University *</label>
             <SchoolCombobox 
@@ -605,7 +615,6 @@ export default function WaitlistPage() {
             )}
           </div>
 
-          {/* Department */}
           <div className="space-y-4">
             <label className="block text-sm font-bold uppercase tracking-wider text-[#F0CEA0]">Department *</label>
             <div className="flex flex-wrap gap-6">
@@ -628,21 +637,8 @@ export default function WaitlistPage() {
                 </label>
               ))}
             </div>
-            {formData.department === 'Other' && (
-              <motion.input
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                required
-                type="text"
-                placeholder="Please specify your department..."
-                value={formData.otherDepartment}
-                onChange={(e) => setFormData({ ...formData, otherDepartment: e.target.value })}
-                className="w-full bg-[#29335C] border border-[#F1F5F9]/20 p-3 focus:border-[#F3A712] outline-none transition-colors mt-2"
-              />
-            )}
           </div>
 
-          {/* Current Level */}
           <div className="space-y-4">
             <label className="block text-sm font-bold uppercase tracking-wider text-[#F0CEA0]">Current Level / Year *</label>
             <div className="flex flex-wrap gap-6">
@@ -667,7 +663,6 @@ export default function WaitlistPage() {
             </div>
           </div>
 
-          {/* SIWES Duration */}
           <div className="space-y-4">
             <label className="block text-sm font-bold uppercase tracking-wider text-[#F0CEA0]">SIWES Duration *</label>
             <div className="flex flex-wrap gap-8">
@@ -692,7 +687,6 @@ export default function WaitlistPage() {
             </div>
           </div>
 
-          {/* Challenges */}
           <div className="space-y-4">
             <label className="block text-sm font-bold uppercase tracking-wider text-[#F0CEA0]">What is your biggest challenge with SIWES right now? *</label>
             <div className="space-y-4">
@@ -714,7 +708,6 @@ export default function WaitlistPage() {
             </div>
           </div>
 
-          {/* Referral Source */}
           <div className="space-y-4">
             <label className="block text-sm font-bold uppercase tracking-wider text-[#F0CEA0]">How did you hear about InternStack? *</label>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -737,32 +730,15 @@ export default function WaitlistPage() {
                 </label>
               ))}
             </div>
-            {formData.source === 'Other' && (
-              <motion.input
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                required
-                type="text"
-                placeholder="Please specify..."
-                value={formData.otherSource}
-                onChange={(e) => setFormData({ ...formData, otherSource: e.target.value })}
-                className="w-full bg-[#29335C] border border-[#F1F5F9]/20 p-3 focus:border-[#F3A712] outline-none transition-colors mt-2"
-              />
-            )}
           </div>
+          */}
 
           <button
-            disabled={isSubmitting}
-            type="submit"
-            className="w-full bg-[#F3A712] text-[#29335C] py-3 font-semibold shadow-[6px_6px_0px_0px_#FFF] hover:-translate-y-1 hover:shadow-[8px_8px_0px_0px_#FFF] active:translate-y-0 active:shadow-none transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 text-sm"
+            disabled={true}
+            type="button"
+            className="w-full bg-[#F3A712]/50 text-[#29335C] py-3 font-semibold shadow-[6px_6px_0px_0px_#FFF] transition-all duration-200 cursor-not-allowed flex items-center justify-center gap-3 text-sm"
           >
-            {isSubmitting ? (
-              <>
-                <Loader2 className="animate-spin" /> Submitting...
-              </>
-            ) : (
-              'Join the Waitlist'
-            )}
+            Shortlist in progress...
           </button>
         </motion.form>
       </div>
