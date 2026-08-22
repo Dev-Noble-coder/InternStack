@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Layers, CheckCircle2, AlertCircle, Loader2, ArrowLeft, Search, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
-import { supabase } from '../lib/supabase';
+import { supabase } from '../../lib/supabase';
 import toast from 'react-hot-toast';
 
 const UNIVERSITIES = [

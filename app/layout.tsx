@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Montserrat } from "next/font/google";
 import { Toaster } from 'react-hot-toast';
 import { Analytics } from "@vercel/analytics/react"
 import "./globals.css";
+import Providers from "./providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -64,7 +65,9 @@ export default function RootLayout({
       <body
         className={`${montserrat.className} antialiased`}
       >
-        {children}
+        <Providers>
+          {children}
+        </Providers>
         <Analytics />
         <Toaster />
       </body>

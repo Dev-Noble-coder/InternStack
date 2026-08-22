@@ -13,8 +13,6 @@ import {
     RocketIcon,
 } from "lucide-react";
 import toast from 'react-hot-toast';
-import NavBar from "../components/NavBar";
-import Footer from "../components/Footer";
 
 const fadeUp = (delay: number = 0): Variants => ({
     initial: { opacity: 0, y: 40 },
@@ -86,8 +84,6 @@ const steps = [
 const HowItWorksPage: React.FC = () => {
     return (
         <>
-            <NavBar />
-
             {/* Hero Banner */}
             <section className="bg-[#29335C] text-[#F1F5F9] pt-32 pb-20 px-5 lg:px-10 overflow-hidden relative">
                 {/* Decorative grid */}
@@ -299,7 +295,6 @@ const HowItWorksPage: React.FC = () => {
             </section>
 
 
-            <Footer />
         </>
     );
 };

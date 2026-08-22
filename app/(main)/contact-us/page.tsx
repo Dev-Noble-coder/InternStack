@@ -1,13 +1,10 @@
 import React from 'react';
-import NavBar from '../components/NavBar';
-import Footer from '../components/Footer';
 import Image from 'next/image';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 
 export default function ContactUs() {
   return (
     <>
-      <NavBar />
       <main className="bg-[#F1F5F9] min-h-screen pt-32 pb-20 px-4 md:px-10 overflow-hidden relative">
         <div className="max-w-7xl mx-auto w-full relative z-10">
           
@@ -147,7 +144,6 @@ export default function ContactUs() {
           </div>
         </div>
       </main>
-      <Footer />
     </>
   );
 }
