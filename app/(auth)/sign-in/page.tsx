@@ -51,12 +51,16 @@ const SignInPage = () => {
 
         try {
             if (isLogin) {
-                await loginMutation.mutateAsync({
+                const res = await loginMutation.mutateAsync({
                     email: formData.email,
                     password: formData.password
                 });
                 toast.success('Logged in successfully!');
-                router.push('/dashboard');
+                if (res?.user?.role === 'admin' || res?.user?.role === 'super_admin') {
+                    router.push('/admin');
+                } else {
+                    router.push('/dashboard');
+                }
             } else {
                 await registerMutation.mutateAsync({
                     firstName: formData.firstName,

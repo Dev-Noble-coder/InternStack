@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Layers, CheckCircle2, AlertCircle, Loader2, ArrowLeft, Search, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 import { supabase } from '../../lib/supabase';
+import { useDebounce } from '../../hooks/useDebounce';
 import toast from 'react-hot-toast';
 
 const UNIVERSITIES = [
@@ -315,9 +316,10 @@ interface FormData {
 function SchoolCombobox({ value, onChange }: { value: string, onChange: (val: string) => void }) {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearch = useDebounce(searchTerm, 150);
   
   const filteredSchools = UNIVERSITIES.filter(school => 
-    school.toLowerCase().includes(searchTerm.toLowerCase())
+    school.toLowerCase().includes(debouncedSearch.toLowerCase())
   );
 
   return (
