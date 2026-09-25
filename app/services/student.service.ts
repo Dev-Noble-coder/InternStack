@@ -58,9 +58,11 @@ export const studentService = {
     company?: string;
     description?: string;
     location?: string;
-    workMode?: string;
+    // workMode?: string;
     internshipType?: string;
-    requirements?: string[];
+    startPeriod?: string;
+    endPeriod?: string;
+    requirements?: string | string[];
     skills?: string[];
     applicationUrl?: string;
     deadline?: string;

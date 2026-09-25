@@ -101,12 +101,15 @@ export interface ListingSubmission {
   manualData?: {
     title?: string;
     companyName?: string;
+    company?: string;
     description?: string;
     location?: string;
-    workMode?: string;
+    // workMode?: string;
     internshipType?: string;
+    startPeriod?: string;
+    endPeriod?: string;
     applicationUrl?: string;
-    requirements?: string[];
+    requirements?: string | string[];
     skills?: string[];
     deadline?: string;
   };

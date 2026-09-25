@@ -15,6 +15,8 @@ import {
   CheckCircle2,
   AlertTriangle,
   Inbox,
+  Plus,
+  Check,
 } from "lucide-react";
 import { useStudentSubmissions, useSubmitListing } from "../../../hooks/useStudent";
 import { Input } from "../../../components/ui/Input";
@@ -35,10 +37,14 @@ export default function StudentSubmissionsPage() {
     company: "",
     description: "",
     location: "",
-    workMode: "onsite",
-    internshipType: "6-Month SIWES",
-    applicationUrl: "",
+    // workMode: "onsite",
+    internshipType: "SIWES",
+    startPeriod: "",
+    endPeriod: "",
     deadline: "",
+    requirements: "",
+    skills: "",
+    applicationUrl: "",
   });
 
   const [page, setPage] = useState(1);
@@ -50,6 +56,102 @@ export default function StudentSubmissionsPage() {
   });
 
   const { mutateAsync: submitListing, isPending: isSubmitting } = useSubmitListing();
+
+  // Smart role suggestions based on role title
+  const getRoleSuggestions = (title: string) => {
+    const t = title.toLowerCase();
+    if (t.includes("front") || t.includes("react") || t.includes("web") || t.includes("vue") || t.includes("angular")) {
+      return {
+        skills: ["React", "JavaScript", "TypeScript", "HTML5/CSS3", "Tailwind CSS", "Next.js", "Git", "REST APIs"],
+        requirements: ["React", "JavaScript", "Git", "Responsive UI", "SIWES Enrolled", "HTML/CSS"],
+      };
+    }
+    if (t.includes("back") || t.includes("node") || t.includes("django") || t.includes("laravel") || t.includes("api") || t.includes("server")) {
+      return {
+        skills: ["Node.js", "Python", "Express.js", "PostgreSQL", "MongoDB", "REST APIs", "Docker", "Git"],
+        requirements: ["Node.js", "Python", "REST APIs", "SQL / Databases", "Git", "SIWES Enrolled"],
+      };
+    }
+    if (t.includes("data") || t.includes("ai") || t.includes("ml") || t.includes("analyst") || t.includes("machine") || t.includes("intelligence")) {
+      return {
+        skills: ["Python", "SQL", "Pandas", "Power BI", "Data Analysis", "Excel", "Machine Learning", "Git"],
+        requirements: ["Python", "SQL", "Data Analysis", "Statistics", "Excel", "SIWES Enrolled"],
+      };
+    }
+    if (t.includes("design") || t.includes("ui") || t.includes("ux") || t.includes("product design")) {
+      return {
+        skills: ["Figma", "UI/UX Design", "Wireframing", "Prototyping", "Design Systems", "User Research", "Adobe XD"],
+        requirements: ["Figma", "UI/UX Design", "Wireframing", "Design Portfolio", "SIWES Enrolled"],
+      };
+    }
+    if (t.includes("mobile") || t.includes("flutter") || t.includes("android") || t.includes("ios") || t.includes("react native") || t.includes("app")) {
+      return {
+        skills: ["Flutter", "React Native", "Dart", "JavaScript", "Mobile UI", "REST APIs", "Git", "Firebase"],
+        requirements: ["Flutter", "React Native", "Mobile UI", "REST APIs", "Git", "SIWES Enrolled"],
+      };
+    }
+    if (t.includes("devops") || t.includes("cloud") || t.includes("security") || t.includes("cyber") || t.includes("linux")) {
+      return {
+        skills: ["Linux", "AWS", "Docker", "Git", "CI/CD", "Bash Scripting", "Networking", "Kubernetes"],
+        requirements: ["Linux", "Cloud (AWS)", "Docker", "Networking", "Git", "SIWES Enrolled"],
+      };
+    }
+    // Default general suggestions
+    return {
+      skills: ["React", "JavaScript", "Python", "Node.js", "SQL", "Git", "Figma", "HTML/CSS", "Tailwind CSS"],
+      requirements: ["JavaScript", "Python", "Git & GitHub", "Problem Solving", "SIWES Enrolled", "HTML/CSS"],
+    };
+  };
+
+  const suggestions = getRoleSuggestions(manualForm.title);
+
+  const selectedSkillsList = manualForm.skills
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+
+  const selectedReqsList = manualForm.requirements
+    .split(",")
+    .map((r) => r.trim())
+    .filter(Boolean);
+
+  const toggleSkill = (skillName: string) => {
+    const current = manualForm.skills
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
+    const index = current.findIndex((s) => s.toLowerCase() === skillName.toLowerCase());
+
+    let updated: string[];
+    if (index >= 0) {
+      updated = current.filter((_, idx) => idx !== index);
+    } else {
+      updated = [...current, skillName];
+    }
+    setManualForm((prev) => ({
+      ...prev,
+      skills: updated.join(", "),
+    }));
+  };
+
+  const toggleRequirement = (reqText: string) => {
+    const current = manualForm.requirements
+      .split(",")
+      .map((r) => r.trim())
+      .filter(Boolean);
+    const index = current.findIndex((r) => r.toLowerCase() === reqText.toLowerCase());
+
+    let updated: string[];
+    if (index >= 0) {
+      updated = current.filter((_, idx) => idx !== index);
+    } else {
+      updated = [...current, reqText];
+    }
+    setManualForm((prev) => ({
+      ...prev,
+      requirements: updated.join(", "),
+    }));
+  };
 
   const handleUrlSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -78,27 +180,43 @@ export default function StudentSubmissionsPage() {
       return;
     }
 
+    const skillsArray = manualForm.skills.trim()
+      ? manualForm.skills.split(",").map((s) => s.trim()).filter(Boolean)
+      : manualForm.requirements.trim()
+      ? manualForm.requirements.split(",").map((s) => s.trim()).filter(Boolean)
+      : [];
+
+    const requirementsStr = manualForm.requirements.trim() || manualForm.skills.trim();
+
     try {
       await submitListing({
         type: "manual",
-        title: manualForm.title,
-        company: manualForm.company,
-        description: manualForm.description,
-        location: manualForm.location,
-        workMode: manualForm.workMode,
+        company: manualForm.company.trim(),
+        title: manualForm.title.trim(),
+        description: manualForm.description.trim(),
+        location: manualForm.location.trim(),
+        // workMode: manualForm.workMode,
         internshipType: manualForm.internshipType,
-        applicationUrl: manualForm.applicationUrl,
-        deadline: manualForm.deadline,
+        startPeriod: manualForm.startPeriod || undefined,
+        endPeriod: manualForm.endPeriod || undefined,
+        deadline: manualForm.deadline || undefined,
+        requirements: requirementsStr,
+        skills: skillsArray,
+        applicationUrl: manualForm.applicationUrl.trim() || undefined,
       });
       setManualForm({
         title: "",
         company: "",
         description: "",
         location: "",
-        workMode: "onsite",
-        internshipType: "6-Month SIWES",
-        applicationUrl: "",
+        // workMode: "onsite",
+        internshipType: "SIWES",
+        startPeriod: "",
+        endPeriod: "",
         deadline: "",
+        requirements: "",
+        skills: "",
+        applicationUrl: "",
       });
       setSuccessModalOpen(true);
     } catch (err: unknown) {
@@ -244,26 +362,26 @@ export default function StudentSubmissionsPage() {
                 required
                 value={manualForm.title}
                 onChange={(e) => setManualForm({ ...manualForm, title: e.target.value })}
-                placeholder="e.g. Software Engineering Intern"
+                placeholder="e.g. Frontend Developer Intern"
               />
               <Input
                 label="Company Name"
                 required
                 value={manualForm.company}
                 onChange={(e) => setManualForm({ ...manualForm, company: e.target.value })}
-                placeholder="e.g. Flutterwave, Paystack, Chevron"
+                placeholder="e.g. Example Technologies"
               />
             </div>
 
             <Textarea
               label="Job Description & Summary"
-              rows={4}
+              rows={3}
               value={manualForm.description}
               onChange={(e) => setManualForm({ ...manualForm, description: e.target.value })}
-              placeholder="Provide a short description of the internship responsibilities..."
+              placeholder="Provide a short description of the internship opportunity..."
             />
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Input
                 label="Location / State"
                 value={manualForm.location}
@@ -271,6 +389,19 @@ export default function StudentSubmissionsPage() {
                 placeholder="e.g. Lagos, Abuja, Port Harcourt"
                 icon={<MapPin className="w-4 h-4" />}
               />
+              <Select
+                label="Internship Type"
+                value={manualForm.internshipType}
+                onChange={(e) => setManualForm({ ...manualForm, internshipType: e.target.value })}
+                options={[
+                  { value: "SIWES", label: "SIWES" },
+                  { value: "3-Month SIWES", label: "3-Month SIWES" },
+                  { value: "6-Month SIWES", label: "6-Month SIWES" },
+                  { value: "1-Year IT", label: "1-Year IT" },
+                  { value: "Direct Internship", label: "Direct Internship" },
+                ]}
+              />
+              {/* Work Mode - Commented out for now, will be added later
               <Select
                 label="Work Mode"
                 value={manualForm.workMode}
@@ -281,33 +412,122 @@ export default function StudentSubmissionsPage() {
                   { value: "hybrid", label: "Hybrid" },
                 ]}
               />
-              <Select
-                label="Internship Duration"
-                value={manualForm.internshipType}
-                onChange={(e) => setManualForm({ ...manualForm, internshipType: e.target.value })}
-                options={[
-                  { value: "3-Month SIWES", label: "3-Month SIWES" },
-                  { value: "6-Month SIWES", label: "6-Month SIWES" },
-                  { value: "1-Year IT", label: "1-Year IT" },
-                ]}
-              />
+              */}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Requirements with Click-to-add Suggestions */}
+            <div className="space-y-2">
               <Input
-                label="External Application Link (Optional)"
-                type="url"
-                value={manualForm.applicationUrl}
-                onChange={(e) => setManualForm({ ...manualForm, applicationUrl: e.target.value })}
-                placeholder="https://..."
+                label="Requirements"
+                value={manualForm.requirements}
+                onChange={(e) => setManualForm({ ...manualForm, requirements: e.target.value })}
+                placeholder="e.g. React, JavaScript, Git (or click suggestions below)"
+              />
+              <div className="p-3 bg-[#0F172A]/70 border border-slate-800 rounded-xl space-y-1.5">
+                <div className="flex items-center gap-1.5 text-[11px] font-semibold text-slate-400">
+                  <Sparkles className="w-3 h-3 text-[#F3A712]" />
+                  <span>Suggested Requirements (click to add/remove or type manually above):</span>
+                </div>
+                <div className="flex flex-wrap gap-1.5 pt-0.5">
+                  {suggestions.requirements.map((req) => {
+                    const isSelected = selectedReqsList.some(
+                      (r) => r.toLowerCase() === req.toLowerCase()
+                    );
+                    return (
+                      <button
+                        key={req}
+                        type="button"
+                        onClick={() => toggleRequirement(req)}
+                        className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium border transition-all cursor-pointer ${
+                          isSelected
+                            ? "bg-[#F3A712]/20 text-[#F3A712] border-[#F3A712]/50 shadow-sm"
+                            : "bg-slate-800/80 text-slate-300 border-slate-700/70 hover:border-slate-500 hover:text-white"
+                        }`}
+                      >
+                        {isSelected ? (
+                          <Check className="w-3 h-3 text-[#F3A712]" />
+                        ) : (
+                          <Plus className="w-3 h-3 text-slate-400" />
+                        )}
+                        <span>{req}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            {/* Skills with Click-to-add Suggestions */}
+            <div className="space-y-2">
+              <Input
+                label="Skills (Comma-separated)"
+                value={manualForm.skills}
+                onChange={(e) => setManualForm({ ...manualForm, skills: e.target.value })}
+                placeholder="e.g. React, JavaScript, Git (or click suggestions below)"
+              />
+              <div className="p-3 bg-[#0F172A]/70 border border-slate-800 rounded-xl space-y-1.5">
+                <div className="flex items-center gap-1.5 text-[11px] font-semibold text-slate-400">
+                  <Sparkles className="w-3 h-3 text-[#F3A712]" />
+                  <span>Suggested Skills for role (click to add/remove or type manually above):</span>
+                </div>
+                <div className="flex flex-wrap gap-1.5 pt-0.5">
+                  {suggestions.skills.map((skill) => {
+                    const isSelected = selectedSkillsList.some(
+                      (s) => s.toLowerCase() === skill.toLowerCase()
+                    );
+                    return (
+                      <button
+                        key={skill}
+                        type="button"
+                        onClick={() => toggleSkill(skill)}
+                        className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium border transition-all cursor-pointer ${
+                          isSelected
+                            ? "bg-[#F3A712]/20 text-[#F3A712] border-[#F3A712]/50 shadow-sm"
+                            : "bg-slate-800/80 text-slate-300 border-slate-700/70 hover:border-slate-500 hover:text-white"
+                        }`}
+                      >
+                        {isSelected ? (
+                          <Check className="w-3 h-3 text-[#F3A712]" />
+                        ) : (
+                          <Plus className="w-3 h-3 text-slate-400" />
+                        )}
+                        <span>{skill}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <Input
+                label="Start Period"
+                type="date"
+                value={manualForm.startPeriod}
+                onChange={(e) => setManualForm({ ...manualForm, startPeriod: e.target.value })}
               />
               <Input
-                label="Application Deadline (Optional)"
+                label="End Period"
+                type="date"
+                value={manualForm.endPeriod}
+                onChange={(e) => setManualForm({ ...manualForm, endPeriod: e.target.value })}
+              />
+              <Input
+                label="Application Deadline"
                 type="date"
                 value={manualForm.deadline}
                 onChange={(e) => setManualForm({ ...manualForm, deadline: e.target.value })}
               />
             </div>
+
+            <Input
+              label="External Application Link (Optional)"
+              type="url"
+              value={manualForm.applicationUrl}
+              onChange={(e) => setManualForm({ ...manualForm, applicationUrl: e.target.value })}
+              placeholder="https://example.com/apply"
+              icon={<Link2 className="w-4 h-4" />}
+            />
 
             <button
               type="submit"
